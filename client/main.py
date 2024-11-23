@@ -45,4 +45,4 @@ async def receive_frames(uri):
 
 
 # Запуск клиента
-asyncio.run(receive_frames("ws://localhost:8765"))
+asyncio.run(receive_frames("ws://localhost:8080"))
