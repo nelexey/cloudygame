@@ -3,7 +3,6 @@ import asyncio
 import websockets
 from io import BytesIO
 
-
 FPS = 60
 
 async def receive_frames(uri):
@@ -28,6 +27,9 @@ async def receive_frames(uri):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         running = False
+                    elif event.type == pygame.MOUSEBUTTONDOWN:
+                        x, y = event.pos
+                        await websocket.send(str({'x': x, 'y': y}))
 
                 clock.tick(FPS)
             except websockets.ConnectionClosed:
@@ -39,4 +41,4 @@ async def receive_frames(uri):
 
     pygame.quit()
 
-asyncio.run(receive_frames("ws://localhost:8765"))
+asyncio.run(receive_frames("ws://localhost:8765/"))
